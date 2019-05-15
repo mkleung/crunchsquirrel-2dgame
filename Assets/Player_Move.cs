@@ -33,7 +33,6 @@ public class Player_Move : MonoBehaviour
     void PlayerMove() {
         // Controls
         moveX = Input.GetAxis("Horizontal");
-        moveY = Input.GetAxis("Vertical");
  
         // Animations
         // Player Direction
@@ -54,7 +53,7 @@ public class Player_Move : MonoBehaviour
 
     void PlayerJump(){
         // Jump code
-      
+
         rigidBody.AddForce(Vector2.up * playerJumpPower);
     }
 
