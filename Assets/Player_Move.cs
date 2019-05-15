@@ -5,49 +5,65 @@ using UnityEngine;
 public class Player_Move : MonoBehaviour
 {
     public int playerSpeed = 10;
-    public bool facingRight = true;
+    private bool facingRight = false;
     public int playerJumpPower = 1250;
 
-    public float moveX;
+    private Rigidbody2D rigidBody;
+
+    private float moveX;
+    private float moveY;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        rigidBody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
         PlayerMove();
+
+        if (Input.GetButtonDown("Jump")) {
+            PlayerJump();
+        }
+       
     }
 
     void PlayerMove() {
         // Controls
         moveX = Input.GetAxis("Horizontal");
-        Debug.Log(moveX);
-
+        moveY = Input.GetAxis("Vertical");
+ 
         // Animations
         // Player Direction
 
+        // move left
         if (moveX < 0.0f && facingRight == false) {
             FlipPlayer();
         }
+        // move right
         else if (moveX > 0.0f && facingRight == true) {
             FlipPlayer();
         }
 
         // Physics
-        gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(moveX * playerSpeed, gameObject.GetComponent<Rigidbody2D>().velocity.y);
+        rigidBody.velocity = new Vector2(moveX * playerSpeed, rigidBody.velocity.y);
 
     }
 
-    void Jump(){
+    void PlayerJump(){
         // Jump code
-
+      
+        rigidBody.AddForce(Vector2.up * playerJumpPower);
     }
 
     void FlipPlayer() {
+        facingRight = !facingRight;
 
+        // change the scale of player to a negative
+        Vector2 localScale = gameObject.transform.localScale;
+        localScale.x *= -1;
+        transform.localScale = localScale;
     }
 }
