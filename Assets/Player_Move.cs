@@ -11,7 +11,20 @@ public class Player_Move : MonoBehaviour
     private Rigidbody2D rigidBody;
 
     private float moveX;
-    private float moveY;
+
+    public bool isGrounded;
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        Debug.Log(col.gameObject.tag);
+
+        if (col.gameObject.tag == "Ground")
+        {
+            isGrounded = true;
+        }
+
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +37,7 @@ public class Player_Move : MonoBehaviour
     {
         PlayerMove();
 
-        if (Input.GetButtonDown("Jump")) {
+        if (Input.GetButtonDown("Jump") && isGrounded == true) {
             PlayerJump();
         }
        
@@ -55,6 +68,7 @@ public class Player_Move : MonoBehaviour
         // Jump code
 
         rigidBody.AddForce(Vector2.up * playerJumpPower);
+        isGrounded = false;
     }
 
     void FlipPlayer() {
@@ -65,4 +79,7 @@ public class Player_Move : MonoBehaviour
         localScale.x *= -1;
         transform.localScale = localScale;
     }
+
+
+
 }

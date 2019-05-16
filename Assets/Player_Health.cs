@@ -6,29 +6,24 @@ using UnityEngine.SceneManagement;
 public class Player_Health : MonoBehaviour
 {
 
-    public bool hasDied;
     public int health;
     // Start is called before the first frame update
     void Start()
     {
-        hasDied = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         if (gameObject.transform.position.y < -7) {
-            hasDied = true;
+            Die();
         }
 
-        if (hasDied == true) {
-            StartCoroutine("Die");
-        }
     }
 
     // Restart the Scene
-    IEnumerator Die() {
+    void Die() {
         SceneManager.LoadScene("Prototype1");
-        yield return null;
+   
     }
 }
