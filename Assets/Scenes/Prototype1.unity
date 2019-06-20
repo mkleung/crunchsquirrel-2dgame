@@ -355,7 +355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 10
-  playerJumpPower: 800
+  playerJumpPower: 400
   isGrounded: 0
 --- !u!114 &753839907
 MonoBehaviour:

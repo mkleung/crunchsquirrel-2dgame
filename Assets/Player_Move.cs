@@ -6,7 +6,7 @@ public class Player_Move : MonoBehaviour
 {
     public int playerSpeed = 100;
     private bool facingRight = false;
-    public int playerJumpPower = 1250;
+    public int playerJumpPower = 250;
 
     private Rigidbody2D rigidBody;
 
